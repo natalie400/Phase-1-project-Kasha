@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KASHA FAST FOOD RESTAURANT</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <header>Kasha's kitchen</header>
+    <h1>WELCOME</h1>
+    <br>
+    <h1>menu</h1>
+    <br>
+    <div class="list">
+    <ul>
+        <li>meatloaf</li>
+        <li>pizza</li>
+        <li>chicken-biryani</li>
+        <li>veggie salad</li>
+        <li>lasagna</li>
+    </ul>
+</div>
+
+<h1>Food Order Form</h1>
+<form id="orderForm">
+    <label for="food">Select a Food:</label>
+    <input type="text" id="orderForm" name="orderForm" required>
+    <button type="submit">Submit Order</button>
+</form>
+<div id="listItem">
+    <h2>Food Details</h2>
+    <p id="foodName"></p>
+    <p id="foodDescription"></p>
+    <img id="foodImage" src="" alt="Food Image">
+</div>
+<button id="likeButton">like</button>
+<span id="like-count">0</span>
+
+<h5>Comment Box</h5>
+    
+<form id="commentForm">
+    <label for="comment"></label> <br>
+    <textarea name="comment" id="comment" cols="40" rows="5" placeholder="leave a comment for the chef"></textarea>
+    <br>
+    <button type="submit">Submit</button>
+    <div id="comment-section"></div>
+
+</form>
+
+    <script src="./index.js"></script>
+</body>
+</html>
