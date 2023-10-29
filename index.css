@@ -16,8 +16,23 @@ header{
 #foodDetail{
     text-align: center;
 }
+.d-display{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap: wrap;
+}
+.d-display div{
+    width:250px;
+    height:250px;
+}
 
-
-button{
-    width: ;
+.d-display div img{
+    height:80%;
+    width:80%;
+    display: block;
+    margin: 0 auto;
+}
+#modal-display img{
+    width: 150px;
+    height: 150px;
 }

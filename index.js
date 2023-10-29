@@ -1,101 +1,82 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let orderForm = document.querySelector('#orderForm');
-    let listItem = document.querySelector('#listItem'); 
-    let foodName = document.querySelector('#foodName');
-    let foodDescription = document.querySelector('#foodDescription');
-    let foodImage = document.querySelector('#foodImage');
-   
-    orderForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        let input = document.querySelector('input[name="orderForm"]');
-        let orderValue = input.value;
+  let orderForm = document.querySelector('#orderForm');
+  let input = document.querySelector('input[name="order"]');
+  let mealDisplay = document.querySelector('.d-display');
+  let modalDisplay = document.querySelector('#modal-display');
+  let orderValue = input.value;
 
-        fetch(`http://localhost:3006/data/${orderValue}`)
-            .then(res => res.json())
-        .then(data=>{
-                //console.log(data);
-                // or update the following
-                if (data.id) {
-              foodName.textContent = data.name;
-            foodDescription.textContent = data.description;
-               foodImage.src = data.image;}
-             else if (orderValue === "items")
-             {listItem.innerHTML = ""; // Clear previous data
 
-            // Filter and display all items
-            data.filter(item => item.id).forEach(item => {
-                let itemDiv = document.createElement('div');
-                let itemName = document.createElement('h3');
-                let itemDescription = document.createElement('p');
-                let itemImage = document.createElement('img');
-
-                itemName.textContent = item.name;
-                itemDescription.textContent = item.description;
-                itemImage.src = item.image;
-
-                itemDiv.appendChild(itemName);
-                itemDiv.appendChild(itemDescription);
-                itemDiv.appendChild(itemImage);
-
-                listItem.appendChild(itemDiv);
-
-   
-            }
-            )}
-          });
-    });
-     //   });
-
-    //const likeBtn =document.querySelector('#likeButton');
-//const likeCount = document.querySelector('#like-count');
-     //let counts = {
-       // likes: 0
-     // }
-     //likeBtn.addEventListener('click', ()=>{
-        //likeBtn.innerHTML == "Like";
-       // counts.likes++;
-        //likeCount.innerHTML = counts.likes + " likes";
-    // })
-     //}
-   
-const likeBtn =document.querySelector('#likeButton');
-const likeCount = document.querySelector('#like-count');
-    
-     let count = 0;
-     likeBtn.addEventListener('click',()=>{
-        count++;
-        likeCount.innerHTML = count + " likes";
-     })
-/*
-  function submitComment (){
-    //grab the comment entered
-    let comment = document.getElementById('commentForm').value;
-    //create a paragraph
-    let paragraph = document.createElement("p")
-    comment.addEventListener('submit', (e)=>{
-
-e.preventDefault();
-paragraph.textContent = comment;
-
-commentSection.appendChild(paragraph)
-submitComment()
-    })
-   }
-
-*/
-document.getElementById('commentForm').addEventListener('submit', function(e) {
+  orderForm.addEventListener('submit', (e) => {
     e.preventDefault();
-  
-//function submitComment() {
-    let comment = document.getElementById('comment')
-    let commentTerm = comment.value
-    let paragraph = document.createElement("p");
+    fetch(`http://localhost:3000/data/${orderValue}`)
+      .then((res) => res.json())
+      .then((meals) => {
+       
+        let cards = '';
+        for (let meal of meals) {
+       let card = `
+      <div class="single" id="${meal.id}">
+      <p> ${meal.id}</p>
+           <h4>${meal.name}</h4>
+          <img src="${meal.image}">
+          <p>${meal.description}</p>
+           <button class="like-button">Like</button>
+           <span class="like-count">likes ${meal.likes}</span>
+        </div>
+        `;
+          cards += card;
+        }
+        mealDisplay.innerHTML = cards;
+//modal display so when clicked it appears on the modal display div 
+        let allMeals = document.querySelectorAll('.single');
+        allMeals.forEach((meal) => {
+          meal.addEventListener('click', (e) => {
+      let found = meals.find((food) => food.id === parseInt(e.target.id));
+     displayMealModal(found);
+          });
+        });
+
+        let likeButtons = document.querySelectorAll('.like-button');
+        likeButtons.forEach((button) => {
+       button.addEventListener('click', () => {
+      let mealId = button.parentElement.id;
+        let meal = meals.find((food) => food.id === parseInt(mealId));
+            if (meal) {
+          meal.likes++; // Increment the likes for this specific meal
+          updateLikeCount(button, meal.likes);
+            }
+          });
+        });
+      });
+  });
+//comment form
+  document.getElementById('commentForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    let comment = document.getElementById('comment');
+    let commentTerm = comment.value;
+    let paragraph = document.createElement('p');
     paragraph.textContent = commentTerm;
 
     let commentSection = document.getElementById('comment-section');
     commentSection.appendChild(paragraph);
-//}
-//submitComment()
-});
+  });
+//when found is called in displaymealmodal a meal is shown
+  function displayMealModal(meal) {
+    if (meal) {
+      let modal = `
+        <div>
+          <h4>${meal.name}</h4>
+          <img src="${meal.image}">
+          <p>${meal.description}</p>
+        </div>
+      `;
+      modalDisplay.innerHTML = modal;
+    }
+ }
+  
 
+  function updateLikeCount(button, likes) {
+    let likeCount = button.nextElementSibling;
+    likeCount.textContent = `likes ${likes}`;
+  }
 });

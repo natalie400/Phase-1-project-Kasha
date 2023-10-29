@@ -6,28 +6,28 @@
           "name": "Pizza",
           "image": "https://static.toiimg.com/thumb/56933159.cms?imgsize=686279&width=800&height=800",
           "description":" rich, meaty flavor that is often associated with traditional Italian pizza.",
-          "likes": 0
+          "likes": 10
         },
         {
           "id": 2,
           "name": "Meatloaf",
           "image": "https://images.immediate.co.uk/production/volatile/sites/30/2019/04/turkish-meatloaf-bf5350b.jpg?resize=768,574",
           "description":"a dish of ground meat that has been combined with other ingredients and formed into the shape of a loaf, then baked or smoked",
-          "likes": 0
+          "likes": 6
         },
         {
           "id": 3,
           "name": "lasagna",
           "image": "https://contenthub.kraftheinz.com/api/public/content/5a31c252af944dc8aa2bee5b4cdae6f4?v=81dbeb44&t=w1004",
           "description":"a wide, flat sheet of pasta with sauce and other ingredients, such as meats and cheese",
-          "likes": 0
+          "likes": 5
         },
         {
           "id": 4,
           "name":"Chicken-biryani" ,
           "image": "https://img-global.cpcdn.com/recipes/bc808d8b27b805e3/400x400cq70/photo.jpg",
           "description":" spiced mix of meat and rice, traditionally cooked over an open fire in a leather pot. It is combined in different ways with a variety of components to create a number of highly tasty and unique flavor combinations",
-          "likes": 0
+          "likes": 78
         },
         {
           "id": 5,
